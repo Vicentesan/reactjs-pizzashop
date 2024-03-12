@@ -51,9 +51,6 @@
  
 @layer base {
   * {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    
     @apply border-border;
   }
   body {
