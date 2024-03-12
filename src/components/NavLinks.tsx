@@ -10,7 +10,7 @@ export function NavLinks(props: NavLinksProps) {
   return (
     <Link
       className={cn(
-        'flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground',
+        'flex items-center gap-1.5 text-sm font-medium text-muted-foreground transition-all duration-300 hover:text-foreground',
         {
           'text-foreground': pathname === props.to,
         },
