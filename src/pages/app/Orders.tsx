@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async'
 
 import { OrdersTableRow } from '@/components/OrdersTableRow'
-import { Input } from '@/components/ui/input'
+import { OrdersTableFilter } from '@/components/OrderTableFilters'
 import {
   Table,
   TableBody,
@@ -20,10 +20,7 @@ export function Orders() {
       </div>
 
       <div className="space-y-2.5">
-        <form className="flex items-center gap-2">
-          <span className="text-sm font-semibold">Filtros</span>
-          <Input placeholder="Nome do cliente" className="h-8 w-[320px]" />
-        </form>
+        <OrdersTableFilter />
 
         <div className="rounded-md border">
           <Table>
