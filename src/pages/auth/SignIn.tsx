@@ -1,6 +1,7 @@
 import { Loader2 } from 'lucide-react'
 import { Helmet } from 'react-helmet-async'
 import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 import { z } from 'zod'
 
 import { Button } from '@/components/ui/button'
@@ -21,9 +22,25 @@ export function SignIn() {
   } = useForm<SignInForm>()
 
   async function handleSignIn({ email }: SignInForm) {
-    console.log(email)
+    try {
+      console.log(email)
 
-    await new Promise((resolve) => setTimeout(resolve, 2000))
+      await new Promise((resolve) => setTimeout(resolve, 2000))
+
+      toast.success('Enviamos um link de autenticação para o seu e-mail.', {
+        action: {
+          label: 'Reenviar',
+          onClick: () => handleSignIn({ email }),
+        },
+      })
+    } catch (err) {
+      toast.error('Algo deu errado.', {
+        action: {
+          label: 'Tentar novamente',
+          onClick: () => handleSignIn({ email }),
+        },
+      })
+    }
   }
 
   return (
