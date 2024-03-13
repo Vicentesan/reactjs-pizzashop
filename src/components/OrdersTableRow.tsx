@@ -1,5 +1,4 @@
 import { ArrowRight, Search, X } from 'lucide-react'
-import {} from 'react-router-dom'
 
 import { Button } from './ui/button'
 import { TableCell, TableRow } from './ui/table'
@@ -25,7 +24,7 @@ export function OrdersTableRow() {
           </div>
         </TableCell>
         <TableCell className="font-medium">Vicente Mallmann Sanchez</TableCell>
-        <TableCell>R$ 149,90</TableCell>
+        <TableCell>R$ 259,60</TableCell>
         <TableCell>
           <Button variant="outline">
             <ArrowRight className="mr-2 size-3" />
