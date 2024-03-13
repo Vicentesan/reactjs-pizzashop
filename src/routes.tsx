@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom'
 
+import { NotFound } from './pages/404'
 import { Dashboard } from './pages/app/Dashboard'
 import { Orders } from './pages/app/Orders'
 import { SignIn } from './pages/auth/SignIn'
@@ -21,6 +22,7 @@ export const router = createBrowserRouter([
         element: <Orders />,
       },
     ],
+    errorElement: <NotFound />,
   },
   {
     path: '/',
