@@ -1,4 +1,11 @@
-import { Line, LineChart, ResponsiveContainer, XAxis, YAxis } from 'recharts'
+import {
+  CartesianGrid,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  XAxis,
+  YAxis,
+} from 'recharts'
 import colors from 'tailwindcss/colors'
 
 import { useTheme } from './theme/theme-provider'
@@ -49,6 +56,11 @@ export function RevenueChart() {
                 })
               }
               width={80}
+            />
+
+            <CartesianGrid
+              vertical={false}
+              className={theme === 'dark' ? 'stroke-muted' : 'stroke-zinc-300'}
             />
 
             <Line
