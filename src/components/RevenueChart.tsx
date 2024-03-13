@@ -1,6 +1,7 @@
 import { Line, LineChart, ResponsiveContainer, XAxis, YAxis } from 'recharts'
 import colors from 'tailwindcss/colors'
 
+import { useTheme } from './theme/theme-provider'
 import {
   Card,
   CardContent,
@@ -20,6 +21,8 @@ const data = [
 ]
 
 export function RevenueChart() {
+  const { theme } = useTheme()
+
   return (
     <Card className="col-span-6">
       <CardHeader className="flex flex-row items-center justify-between pb-8">
@@ -52,7 +55,9 @@ export function RevenueChart() {
               type="linear"
               strokeWidth={2}
               dataKey="revenue"
-              stroke={colors.violet['500']}
+              stroke={
+                theme === 'dark' ? colors.emerald[400] : colors.emerald[500]
+              }
             />
           </LineChart>
         </ResponsiveContainer>
