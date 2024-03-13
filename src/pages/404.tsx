@@ -8,7 +8,7 @@ export function NotFound() {
         Voltar para o{' '}
         <Link
           to="/"
-          className="text-sky-500 underline underline-offset-4 dark:text-sky-500"
+          className="text-sky-500 underline underline-offset-4 dark:text-sky-400"
         >
           dashboard
         </Link>
