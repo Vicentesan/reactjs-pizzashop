@@ -14,7 +14,7 @@ export function App() {
     <HelmetProvider>
       {/* a cool trick is to use a the application name in the local storage, also its cool to versonize the system to manage state changes */}
       <ThemeProvider storageKey="@pizzashop:theme-1.0.0" defaultTheme="dark">
-        <Helmet title="%s | pizza.shop" />
+        <Helmet titleTemplate="%s | pizza.shop" />
 
         <ToastProvider />
 
