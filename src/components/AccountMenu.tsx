@@ -44,20 +44,19 @@ export function AccountMenu() {
 
       <DropdownMenuContent align="end" className="w-56">
         <DropdownMenuLabel className="flex flex-col">
-          <span>
-            {isProfileLoading ? (
-              <Skeleton className="h-4 w-40" />
-            ) : (
-              profile?.name
-            )}
-          </span>
-          <span className="text-xs font-normal text-muted-foreground">
-            {isProfileLoading ? (
-              <Skeleton className="h-4 w-40" />
-            ) : (
-              profile?.email
-            )}
-          </span>
+          {isProfileLoading ? (
+            <div className="space-y-1.5">
+              <Skeleton className="h-4 w-32" />
+              <Skeleton className="h-4 w-24" />
+            </div>
+          ) : (
+            <>
+              <span>{profile?.name}</span>
+              <span className="text-xs font-normal text-muted-foreground">
+                {profile?.email}
+              </span>
+            </>
+          )}
         </DropdownMenuLabel>
 
         <DropdownMenuSeparator />
