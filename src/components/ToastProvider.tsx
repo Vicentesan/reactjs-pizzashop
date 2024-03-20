@@ -1,9 +1,9 @@
-import { Toaster } from 'sonner'
+import { Toaster, ToasterProps } from 'sonner'
 
 import { useTheme } from './theme/theme-provider'
 
-export function ToastProvider() {
+export function ToastProvider(props: ToasterProps) {
   const { theme } = useTheme()
 
-  return <Toaster richColors theme={theme} />
+  return <Toaster richColors theme={theme} {...props} />
 }
