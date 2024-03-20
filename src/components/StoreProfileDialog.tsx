@@ -31,6 +31,7 @@ export function StoreProfileDialog() {
   const { data: managedRestaurant } = useQuery({
     queryKey: ['managed-restaurant'],
     queryFn: getManagedRestaurant,
+    staleTime: Infinity,
   })
 
   const { register, handleSubmit } = useForm<StoreProfileSchema>({
