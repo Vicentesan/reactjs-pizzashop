@@ -9,6 +9,7 @@ import { updateProfile as updateProfileFn } from '@/api/update-profile'
 
 import { Button } from './ui/button'
 import {
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -85,9 +86,11 @@ export function StoreProfileDialog() {
         </div>
 
         <DialogFooter>
-          <Button variant="outline" type="button">
-            Cancelar
-          </Button>
+          <DialogClose asChild>
+            <Button variant="outline" type="button">
+              Cancelar
+            </Button>
+          </DialogClose>
           <Button type="submit" variant="success">
             Salvar
           </Button>
