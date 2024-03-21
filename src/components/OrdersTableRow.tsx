@@ -1,11 +1,26 @@
+import { formatDistanceToNow } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
 import { ArrowRight, Search, X } from 'lucide-react'
 
 import { OrderDetails } from './OrderDetails'
+import { OrdersStatus } from './OrdersStatus'
 import { Button } from './ui/button'
 import { Dialog, DialogTrigger } from './ui/dialog'
 import { TableCell, TableRow } from './ui/table'
 
-export function OrdersTableRow() {
+interface OrdersTableRowProps {
+  order: {
+    id: string
+    createdAt: string
+    status: 'pending' | 'canceled' | 'processing' | 'delivering' | 'delivered'
+    customerName: string
+    totalInCents: number
+  }
+}
+
+export function OrdersTableRow({ order }: OrdersTableRowProps) {
+  const orderTotal = order.totalInCents / 100
+
   return (
     <>
       <TableRow>
@@ -22,17 +37,24 @@ export function OrdersTableRow() {
           </Dialog>
         </TableCell>
         <TableCell className="font-mono text-xs font-medium">
-          821e78f7asdhdf128h
+          {order.id}
         </TableCell>
-        <TableCell className="text-muted-foreground">há 15 minutos</TableCell>
+        <TableCell className="text-muted-foreground">
+          {formatDistanceToNow(order.createdAt, {
+            locale: ptBR,
+            addSuffix: true,
+          })}
+        </TableCell>
         <TableCell>
-          <div className="flex items-center gap-2">
-            <span className="h-2 w-2 rounded-full bg-slate-400" />
-            <span className="font-medium text-muted-foreground">Pendente</span>
-          </div>
+          <OrdersStatus status={order.status} />
         </TableCell>
-        <TableCell className="font-medium">Vicente Mallmann Sanchez</TableCell>
-        <TableCell>R$ 259,60</TableCell>
+        <TableCell className="font-medium">{order.customerName}</TableCell>
+        <TableCell>
+          {orderTotal.toLocaleString('pt-BR', {
+            style: 'currency',
+            currency: 'BRL',
+          })}
+        </TableCell>
         <TableCell>
           <Button variant="outline">
             <ArrowRight className="mr-2 size-3" />
