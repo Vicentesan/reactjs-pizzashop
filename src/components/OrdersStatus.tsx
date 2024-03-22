@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils'
 
-type OrdersStatus =
+export type OrdersStatusType =
   | 'pending'
   | 'canceled'
   | 'processing'
@@ -8,10 +8,10 @@ type OrdersStatus =
   | 'delivered'
 
 interface OrdersStatusProps {
-  status: OrdersStatus
+  status: OrdersStatusType
 }
 
-const orderStatusMap: Record<OrdersStatus, string> = {
+const orderStatusMap: Record<OrdersStatusType, string> = {
   pending: 'Pendente',
   canceled: 'Cancelado',
   processing: 'Em Preparo',

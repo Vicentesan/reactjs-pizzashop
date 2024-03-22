@@ -8,6 +8,7 @@ import { cancelOrder as cancelOrderFn } from '@/api/cancel-order'
 import { GetOrdersResponse } from '@/api/get-orders'
 
 import { OrderDetails } from './OrderDetails'
+import type { OrdersStatusType } from './OrdersStatus'
 import { OrdersStatus } from './OrdersStatus'
 import { Button } from './ui/button'
 import { Dialog, DialogTrigger } from './ui/dialog'
@@ -27,30 +28,34 @@ export function OrdersTableRow({ order }: OrdersTableRowProps) {
   const [isDetailsOpen, setIsDetailsOpen] = useState<boolean>(false)
   const queryClient = useQueryClient()
 
+  function updateOrderStatusOnCache(orderId: string, status: OrdersStatusType) {
+    const ordersListCached = queryClient.getQueriesData<GetOrdersResponse>({
+      queryKey: ['get-orders'],
+    })
+
+    ordersListCached.forEach(([cacheKey, cacheData]) => {
+      if (!cacheData) return
+
+      queryClient.setQueryData<GetOrdersResponse>(cacheKey, {
+        ...cacheData,
+        orders: cacheData.orders.map((order) => {
+          if (order.id === orderId) {
+            return {
+              ...order,
+              status,
+            }
+          }
+
+          return order
+        }),
+      })
+    })
+  }
+
   const { mutateAsync: cancelOrder } = useMutation({
     mutationFn: cancelOrderFn,
     async onSuccess(_, { orderId }) {
-      const ordersListCached = queryClient.getQueriesData<GetOrdersResponse>({
-        queryKey: ['get-orders'],
-      })
-
-      ordersListCached.forEach(([cacheKey, cacheData]) => {
-        if (!cacheData) return
-
-        queryClient.setQueryData<GetOrdersResponse>(cacheKey, {
-          ...cacheData,
-          orders: cacheData.orders.map((order) => {
-            if (order.id === orderId) {
-              return {
-                ...order,
-                status: 'canceled',
-              }
-            }
-
-            return order
-          }),
-        })
-      })
+      updateOrderStatusOnCache(orderId, 'canceled')
     },
   })
 
