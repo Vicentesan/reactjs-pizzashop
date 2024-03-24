@@ -1,8 +1,17 @@
+import { useQuery } from '@tanstack/react-query'
 import { DollarSign } from 'lucide-react'
+
+import { getMonthsCanceledOrdersAmount } from '@/api/get-month-canceled-orders-amount'
+import { cn } from '@/lib/utils'
 
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
 
 export function MonthCanceledOrdersAmountCard() {
+  const { data: monthCanceledOrdersAmount } = useQuery({
+    queryKey: ['metrics', 'month-canceled-orders-amount'],
+    queryFn: getMonthsCanceledOrdersAmount,
+  })
+
   return (
     <Card>
       <CardHeader className="flex-row items-center justify-between space-y-0 pb-2">
@@ -13,11 +22,31 @@ export function MonthCanceledOrdersAmountCard() {
       </CardHeader>
 
       <CardContent className="space-y-1">
-        <span className="text-2xl font-bold tracking-tight">32</span>
-        <p className="text-xs text-muted-foreground">
-          <span className="text-emerald-500 dark:text-emerald-400">-2%</span> em
-          relação ao mês anterior
-        </p>
+        {monthCanceledOrdersAmount && (
+          <>
+            <span className="text-2xl font-bold tracking-tight">
+              {monthCanceledOrdersAmount.amount.toLocaleString('pt-BR')}
+            </span>
+            <p className="text-xs text-muted-foreground">
+              <span
+                className={cn('', {
+                  'text-rose-500 dark:text-rose-400':
+                    monthCanceledOrdersAmount.diffFromLastMonth >= 0,
+                  'text-emerald-500 dark:text-emerald-400':
+                    monthCanceledOrdersAmount.diffFromLastMonth < 0,
+                })}
+              >
+                {monthCanceledOrdersAmount.diffFromLastMonth === 0
+                  ? monthCanceledOrdersAmount.diffFromLastMonth
+                  : monthCanceledOrdersAmount.diffFromLastMonth < 0
+                    ? `${monthCanceledOrdersAmount.diffFromLastMonth}`
+                    : `+${monthCanceledOrdersAmount.diffFromLastMonth}`}
+                %
+              </span>{' '}
+              em relação ao mês anterior
+            </p>
+          </>
+        )}
       </CardContent>
     </Card>
   )
