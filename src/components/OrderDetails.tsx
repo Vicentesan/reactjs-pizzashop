@@ -4,6 +4,7 @@ import { ptBR } from 'date-fns/locale'
 
 import { getOrderDetails } from '@/api/get-order-details'
 
+import { OrderDetailsSkeleton } from './OrderDetailsSkeleton'
 import { OrdersStatus } from './OrdersStatus'
 import {
   DialogContent,
@@ -32,7 +33,7 @@ export function OrderDetails({
   orderTotal,
   isOpened,
 }: OrderDetailsProps) {
-  const { data: order } = useQuery({
+  const { data: order, isLoading: isLoadingOrderDetails } = useQuery({
     queryKey: ['order-details', orderId],
     queryFn: () => getOrderDetails({ orderId }),
     enabled: isOpened,
@@ -44,6 +45,7 @@ export function OrderDetails({
         <DialogTitle>Pedido: {orderId}</DialogTitle>
         <DialogDescription>Detalhes do Pedido</DialogDescription>
       </DialogHeader>
+      {isLoadingOrderDetails && <OrderDetailsSkeleton />}
 
       {order && (
         <div className="space-y-3">
