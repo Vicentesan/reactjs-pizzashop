@@ -4,6 +4,7 @@ import { DollarSign } from 'lucide-react'
 import { getMonthRevenue } from '@/api/get-month-revenue'
 import { cn } from '@/lib/utils'
 
+import { MetricsCardSkeleton } from './MetricsCardSkeleton'
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
 
 export function MonthRevenueCard() {
@@ -24,7 +25,7 @@ export function MonthRevenueCard() {
       </CardHeader>
 
       <CardContent className="space-y-1">
-        {monthRevenue && (
+        {monthRevenue ? (
           <>
             <span className="text-2xl font-bold tracking-tight">
               {monthTotalRevenue.toLocaleString('pt-BR', {
@@ -51,6 +52,8 @@ export function MonthRevenueCard() {
               em relação ao mês passado
             </p>
           </>
+        ) : (
+          <MetricsCardSkeleton />
         )}
       </CardContent>
     </Card>
