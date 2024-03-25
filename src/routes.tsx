@@ -22,7 +22,6 @@ export const router = createBrowserRouter([
         element: <Orders />,
       },
     ],
-    errorElement: <NotFound />,
   },
   {
     path: '/',
@@ -37,5 +36,9 @@ export const router = createBrowserRouter([
         element: <SignUp />,
       },
     ],
+  },
+  {
+    path: '*',
+    element: <NotFound />,
   },
 ])
