@@ -6,6 +6,7 @@ import { z } from 'zod'
 import { getOrders } from '@/api/get-orders'
 import { OrdersTableRow } from '@/components/OrdersTableRow'
 import { OrdersTableFilter } from '@/components/OrderTableFilters'
+import { OrderTableSkeleton } from '@/components/OrderTableSkeleton'
 import { Pagination } from '@/components/Pagination'
 import {
   Table,
@@ -33,7 +34,7 @@ export function Orders() {
     .transform((page) => page - 1)
     .parse(pageOnSearchParams)
 
-  const { data: result } = useQuery({
+  const { data: result, isLoading: isLoadingOrders } = useQuery({
     queryKey: ['orders', pageIndex, orderId, customerName, status],
     queryFn: () =>
       getOrders({
@@ -77,6 +78,8 @@ export function Orders() {
                 </TableRow>
               </TableHeader>
               <TableBody>
+                {isLoadingOrders && <OrderTableSkeleton />}
+
                 {result &&
                   result.orders.map((order) => (
                     <OrdersTableRow key={order.id} order={order} />
