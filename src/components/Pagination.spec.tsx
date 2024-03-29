@@ -3,12 +3,13 @@ import UserEvent from '@testing-library/user-event'
 
 import { Pagination } from './Pagination'
 
-const pageIndex = 0
+let pageIndex = 0
 const totalCount = 200
 const perPage = 10
 const onPageChangeSpyFn = vi.fn()
 
 const pages = totalCount / perPage
+const lastPageIndex = pages - 1
 
 const user = UserEvent.setup()
 
@@ -47,5 +48,66 @@ describe('Pagination', () => {
     await user.click(nextPageButton)
 
     expect(onPageChangeSpyFn).toHaveBeenCalledWith(1)
+  })
+
+  it('should be able to navigate to the previous next page', async () => {
+    pageIndex = 5
+
+    const { getByRole } = render(
+      <Pagination
+        pageIndex={pageIndex}
+        totalCount={totalCount}
+        perPage={perPage}
+        onPageChange={onPageChangeSpyFn}
+      />,
+    )
+
+    const nextPageButton = getByRole('button', {
+      name: 'Página anterior',
+    })
+
+    await user.click(nextPageButton)
+
+    expect(onPageChangeSpyFn).toHaveBeenCalledWith(4)
+  })
+
+  it('should be able to navigate to the first page', async () => {
+    pageIndex = 5
+
+    const { getByRole } = render(
+      <Pagination
+        pageIndex={pageIndex}
+        totalCount={totalCount}
+        perPage={perPage}
+        onPageChange={onPageChangeSpyFn}
+      />,
+    )
+
+    const nextPageButton = getByRole('button', {
+      name: 'Primeira página',
+    })
+
+    await user.click(nextPageButton)
+
+    expect(onPageChangeSpyFn).toHaveBeenCalledWith(0)
+  })
+
+  it('should be able to navigate to the last page', async () => {
+    const { getByRole } = render(
+      <Pagination
+        pageIndex={pageIndex}
+        totalCount={totalCount}
+        perPage={perPage}
+        onPageChange={onPageChangeSpyFn}
+      />,
+    )
+
+    const nextPageButton = getByRole('button', {
+      name: 'Última página',
+    })
+
+    await user.click(nextPageButton)
+
+    expect(onPageChangeSpyFn).toHaveBeenCalledWith(lastPageIndex)
   })
 })
