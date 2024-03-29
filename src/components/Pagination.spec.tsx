@@ -51,7 +51,8 @@ describe('Pagination', () => {
   })
 
   it('should be able to navigate to the previous next page', async () => {
-    pageIndex = 5
+    pageIndex = pages / 2
+    const nextPage = pageIndex - 1
 
     const { getByRole } = render(
       <Pagination
@@ -68,11 +69,11 @@ describe('Pagination', () => {
 
     await user.click(nextPageButton)
 
-    expect(onPageChangeSpyFn).toHaveBeenCalledWith(4)
+    expect(onPageChangeSpyFn).toHaveBeenCalledWith(nextPage)
   })
 
   it('should be able to navigate to the first page', async () => {
-    pageIndex = 5
+    pageIndex = pages / 2
 
     const { getByRole } = render(
       <Pagination
