@@ -8,7 +8,7 @@
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "test": "vitest"
+    "test": "vitest --no-file-parallelism --no-isolate"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
@@ -46,6 +46,7 @@
     "@rocketseat/eslint-config": "^2.2.2",
     "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^14.2.2",
+    "@testing-library/user-event": "^14.5.2",
     "@types/node": "^20.11.25",
     "@types/react": "^18.2.64",
     "@types/react-dom": "^18.2.21",
