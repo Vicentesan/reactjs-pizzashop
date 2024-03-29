@@ -14,6 +14,10 @@ const lastPageIndex = pages - 1
 const user = UserEvent.setup()
 
 describe('Pagination', () => {
+  beforeEach(() => {
+    onPageChangeSpyFn.mockClear()
+  })
+
   it('should display the right amount of pages and results', () => {
     const { getByText } = render(
       <Pagination
