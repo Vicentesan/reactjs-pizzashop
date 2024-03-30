@@ -1,4 +1,5 @@
 import { useMutation } from '@tanstack/react-query'
+import { AxiosError } from 'axios'
 import { Loader2 } from 'lucide-react'
 import { Helmet } from 'react-helmet-async'
 import { useForm } from 'react-hook-form'
@@ -45,6 +46,14 @@ export function SignIn() {
         },
       })
     } catch (err) {
+      console.log(err)
+
+      if (err instanceof AxiosError && err.message.includes('code 401')) {
+        toast.error('Credenciais inválidas.')
+
+        return
+      }
+
       toast.error('Algo deu errado.', {
         action: {
           label: 'Tentar novamente',
