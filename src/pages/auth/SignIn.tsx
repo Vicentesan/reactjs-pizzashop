@@ -46,8 +46,6 @@ export function SignIn() {
         },
       })
     } catch (err) {
-      console.log(err)
-
       if (err instanceof AxiosError && err.message.includes('code 401')) {
         toast.error('Credenciais inválidas.')
 
