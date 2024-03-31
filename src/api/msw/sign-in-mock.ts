@@ -1,11 +1,12 @@
 import { http, HttpResponse } from 'msw'
 
 import { mockedEmail } from '../../../test/utils'
+import { SignInBody } from '../sign-in'
 
-export const signInMock = http.post(
+export const signInMock = http.post<never, SignInBody>(
   '/authenticate',
   async ({ request: req }) => {
-    const { email } = (await req.json()) as { email?: string | null }
+    const { email } = await req.json()
 
     if (email === mockedEmail)
       return new HttpResponse(null, {

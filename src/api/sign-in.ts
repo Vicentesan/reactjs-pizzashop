@@ -1,6 +1,6 @@
 import { api } from '@/lib/axios'
 
-interface SignInBody {
+export interface SignInBody {
   email: string
 }
 
