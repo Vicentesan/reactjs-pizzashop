@@ -1,11 +1,11 @@
 import { http, HttpResponse } from 'msw'
+
 import {
   mockedManagerId,
   mockedRestaurantDescription,
   mockedRestaurantId,
   mockedRestaurantName,
-} from 'test/utils'
-
+} from '../../../test/utils'
 import { GetManagedRestaurantResponse } from '../get-managed-restaurant'
 
 export const getManagedRestaurantMock = http.get<

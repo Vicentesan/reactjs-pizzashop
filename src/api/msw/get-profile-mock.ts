@@ -1,11 +1,11 @@
 import { http, HttpResponse } from 'msw'
+
 import {
   mockedManagerEmail,
   mockedManagerId,
   mockedManagerName,
   mockedManagerPhone,
-} from 'test/utils'
-
+} from '../../../test/utils'
 import { GetProfileResponse } from '../get-profile'
 
 export const getProfileMock = http.get<never, never, GetProfileResponse>(
