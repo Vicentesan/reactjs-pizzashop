@@ -1,2 +1,4 @@
+export const mockedName = 'John Doe'
 export const mockedEmail = 'johndoe@example.com'
-export const mockedRestaurantName = 'Pizza do Sanchez'
+export const mockedPhone = '99999999999'
+export const mockedRestaurantName = 'Pizza do John'
