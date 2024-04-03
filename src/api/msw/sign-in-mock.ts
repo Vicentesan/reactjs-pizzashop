@@ -1,6 +1,6 @@
 import { http, HttpResponse } from 'msw'
 
-import { mockedEmail } from '../../../test/utils'
+import { mockedManagerEmail } from '../../../test/utils'
 import { SignInBody } from '../sign-in'
 
 export const signInMock = http.post<never, SignInBody>(
@@ -8,7 +8,7 @@ export const signInMock = http.post<never, SignInBody>(
   async ({ request: req }) => {
     const { email } = await req.json()
 
-    if (email === mockedEmail)
+    if (email === mockedManagerEmail)
       return new HttpResponse(null, {
         status: 200,
         headers: {
