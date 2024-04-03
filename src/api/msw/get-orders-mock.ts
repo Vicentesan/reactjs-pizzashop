@@ -14,7 +14,7 @@ const statuses: OrdersStatusType[] = [
   'delivering',
 ]
 
-const orders: Orders = Array.from({ length: 60 }).map((_, i) => {
+export const orders: Orders = Array.from({ length: 60 }).map((_, i) => {
   return {
     id: `order-${i + 1}`,
     customerName: `Customer ${i + 1}`,

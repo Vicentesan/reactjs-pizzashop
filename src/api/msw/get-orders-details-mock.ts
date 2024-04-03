@@ -1,30 +1,30 @@
 import { http, HttpResponse } from 'msw'
 
 import {
-  mockedManagerEmail,
-  mockedManagerName,
-  mockedManagerPhone,
-} from '../../../test/utils'
-import {
   GetOrderDetailsParams,
   GetOrderDetailsResponse,
 } from '../get-order-details'
+import { orders } from './get-orders-mock'
 
 export const getOrderDetailsMock = http.get<
   GetOrderDetailsParams,
   never,
   GetOrderDetailsResponse
 >('/orders/:orderId', ({ params }) => {
+  const order = orders.find((order) => order.id === params.orderId)
+
+  if (!order) return HttpResponse.json(null, { status: 404 })
+
   return HttpResponse.json({
-    id: params.orderId,
+    id: order.id,
     customer: {
-      name: mockedManagerName,
-      email: mockedManagerEmail,
-      phone: mockedManagerPhone,
+      name: order.customerName,
+      email: 'Não identificado',
+      phone: 'Não identificado',
     },
-    status: 'pending',
-    createdAt: new Date().toISOString(),
-    totalInCents: 5000,
+    status: order.status,
+    createdAt: order.createdAt,
+    totalInCents: order.totalInCents,
     orderItems: [
       {
         id: 'order-item-1',
