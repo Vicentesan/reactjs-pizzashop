@@ -2,10 +2,10 @@ import { cn } from '@/lib/utils'
 
 export type OrdersStatusType =
   | 'pending'
-  | 'canceled'
   | 'processing'
   | 'delivering'
   | 'delivered'
+  | 'canceled'
 
 interface OrdersStatusProps {
   status: OrdersStatusType
@@ -26,7 +26,7 @@ export const orderStatusMap: Record<OrdersStatusType, OrderStatusInfo> = {
 
 export function OrdersStatus({ status }: OrdersStatusProps) {
   return (
-    <div className="lex items-center gap-2 whitespace-nowrap">
+    <div className="flex items-center gap-2 whitespace-nowrap">
       <span
         role="status"
         aria-label={orderStatusMap[status].value}

@@ -1,12 +1,12 @@
 import { http, HttpResponse } from 'msw'
 
+import { OrdersStatusType } from '@/components/OrdersStatus'
+
 import { GetOrdersResponse } from '../get-orders'
 
 type Orders = GetOrdersResponse['orders']
 
-type OrderStatus = GetOrdersResponse['orders'][number]['status']
-
-const statuses: OrderStatus[] = [
+const statuses: OrdersStatusType[] = [
   'pending',
   'processing',
   'canceled',
