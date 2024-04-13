@@ -42,7 +42,7 @@ export function SignUp() {
     try {
       await registerRestaurant({ restaurantName, managerName, email, phone })
 
-      toast.success(`Restaurante ${restaurantName} cadastrado com sucesso`, {
+      toast.success(`Restaurante "${restaurantName}" cadastrado com sucesso.`, {
         action: {
           label: 'Login',
           onClick: () => navigate(`/sign-in?email=${email}`),
