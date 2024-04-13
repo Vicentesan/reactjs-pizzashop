@@ -44,7 +44,7 @@ export function MonthCanceledOrdersAmountCard() {
                     : `+${monthCanceledOrdersAmount.diffFromLastMonth}`}
                 %
               </span>{' '}
-              em relação ao mês anterior
+              em relação ao mês passado
             </p>
           </>
         ) : (
